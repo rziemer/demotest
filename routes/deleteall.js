@@ -13,7 +13,7 @@ var config =
     ssl: JSON.parse(process.env.DB_SSL.toLowerCase())
 };
 
-function GetSQLData(res)
+function DeleteSQLData()
 {
     function SQLErrorHandler(err)
     {
@@ -23,25 +23,16 @@ function GetSQLData(res)
             throw err;
         }
     }
-
-    function SQLSelectHandler(err, result, fields)
-    {
-        if (err)
-        {
-            console.log("Error: " + err);
-            throw err;
-        }
-        res.render('echoRequest', { myTitle: 'Echo Request', myData: result})
-    }
-
+      
     var conn = new mysql.createConnection(config);
     conn.connect(SQLErrorHandler);
-    conn.query('SELECT * FROM `demo_table`', SQLSelectHandler);
+    conn.query('DELETE FROM `demo_table`', SQLErrorHandler);
     conn.end(SQLErrorHandler);
 }
 
-router.get('/', function(req, res, next) {
-    GetSQLData(res);
+router.post('/', function(req, res, next) {
+    DeleteSQLData();
+    res.redirect('/echo');
 });
 
 module.exports = router;
