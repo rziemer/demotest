@@ -1,0 +1,18 @@
+Update package.json to replace line 14 with:
+     "morgan": "~1.9.0",
+This is an old version of Morgan and dependabot will find it and update the dependency.
+
+Start with the basic EchoPost app without delete all and without the update functionality -- just add and delete.
+Have a dev branch with a broken update function
+Have a code branch that has the correct updates for the update function in it
+Have two errors -- one preventing build, and another that crashes on runtime
+Have the code branch also contain all the code for the delete all function
+
+
+Master -- The original EchoPost application -- V1                __V2__                                      __V3__
+  |                                                             /\     |                                    /\
+  |__ Update                                          __ (PR) __|      |__ DeleteAll              __ (PR) __|
+  |     |                                            /\                        |                 /\
+  |     |__ Dev -- This is the broken code __ (PR) __|                         |__ Dev __ (PR) __|
+  |
+  |__ Code -- This has all the final code snippets needed for the lab
